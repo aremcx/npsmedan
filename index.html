@@ -77,9 +77,11 @@
     <div id="formNetworkError" style="color:red; display:none; margin-top:10px;">Network error, please try again later.</div>
     <div id="formServerError" style="color:red; display:none; margin-top:10px;">Server error, please try again later.</div>
     <div id="formLoader" style="display:none; margin-top:10px; text-align:center;">Submitting, please wait...</div>
-    <div id="loader" style="display:none; text-align:center; margin-top:20px;">
-    <img src="/img/loader.gif" alt="Loading..." />
-    <p>Submitting your form, please wait...</p>
+    <div id="loader" class="loader" style="display: none;">
+  <div class="spinner"></div>
+  <p>Submitting, please wait…</p>
+</div>
+    </form>
   </div>
 </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
