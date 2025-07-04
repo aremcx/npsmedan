@@ -1,0 +1,68 @@
+<form id="smedanForm">
+  <label>Organisation Name:</label><br>
+  <input type="text" id="orgName" required><br><br>
+
+  <label>Are you registered with SMEDAN?</label><br>
+  <input type="radio" name="smedan" value="Yes" onclick="toggleDiscount(true)"> Yes
+  <input type="radio" name="smedan" value="No" onclick="toggleDiscount(false)"> No<br><br>
+
+  <label>Amount Purchased (₦):</label><br>
+  <input type="number" id="amount" oninput="calculateDiscount()"><br><br>
+
+  <label>15% Discount (₦):</label><br>
+  <input type="number" id="discount" readonly><br><br>
+
+  <label>Final Amount Paid (₦):</label><br>
+  <input type="number" id="finalAmount" readonly><br><br>
+
+  <label>Remarks:</label><br>
+  <textarea id="remarks"></textarea><br><br>
+
+  <label>Date of Transaction:</label><br>
+  <input type="date" id="date"><br><br>
+
+  <label>Officer ID:</label><br>
+  <input type="text" id="officerId"><br><br>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  function toggleDiscount(eligible) {
+    calculateDiscount(eligible);
+  }
+
+  function calculateDiscount(eligible = document.querySelector('input[name="smedan"]:checked')?.value === 'Yes') {
+    const amount = parseFloat(document.getElementById("amount").value) || 0;
+    const discount = eligible ? amount * 0.15 : 0;
+    document.getElementById("discount").value = discount.toFixed(2);
+    document.getElementById("finalAmount").value = (amount - discount).toFixed(2);
+  }
+</script>
+<script>
+  document.getElementById('smedanForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const data = {
+      orgName: document.getElementById('orgName').value,
+      smedan: document.querySelector('input[name="smedan"]:checked')?.value || "No",
+      amount: parseFloat(document.getElementById('amount').value),
+      discount: parseFloat(document.getElementById('discount').value),
+      finalAmount: parseFloat(document.getElementById('finalAmount').value),
+      remarks: document.getElementById('remarks').value,
+      date: document.getElementById('date').value,
+      officerId: document.getElementById('officerId').value
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbxOM5RXzKCQ88LqJsNM-WGzFGg49xDfwDdP6y2hvToFOSOnmRrHW_8gf0YJqf231gOV/exec", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(res => res.text())
+    .then(response => alert("Submitted successfully ✅"))
+    .catch(error => alert("Something went wrong ❌"));
+  });
+</script>

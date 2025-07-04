@@ -1,0 +1,123 @@
+@media screen and (max-width: 600px) {
+  .form-container {
+    padding: 20px;
+    border-left: none;
+    border-top: 6px solid #002f6c;
+  }
+
+  h2 {
+    font-size: 1.4em;
+  }
+
+  .radio-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  input, textarea, select, button {
+    font-size: 1em;
+  }
+}
+/* File: style.css */
+/* This file contains the styles for the SMEDAN-NIPOST Discount Form */
+/* It includes responsive design for better usability on mobile devices */
+/* It also includes styles for the form elements, buttons, and layout */    
+
+
+body {
+  background-color: #f4f4f4;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 30px;
+}
+
+.form-container {
+  background-color: #ffffff;
+  border-left: 8px solid #002f6c;
+  border-radius: 8px;
+  padding: 30px 25px;
+  max-width: 650px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #002f6c;
+  margin-bottom: 25px;
+  font-size: 1.8em;
+  border-bottom: 2px solid #fcbf23;
+  padding-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #002f6c;
+}
+
+input, textarea, select, button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #002f6c;
+  box-shadow: 0 0 4px rgba(0, 47, 108, 0.2);
+}
+
+.radio-group {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: #002f6c;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #004a99;
+}
+
+#loader {
+  font-weight: bold;
+  color: #002f6c;
+}
+#loader.hidden {
+  display: none;
+}   
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+  .form-container {
+    padding: 20px;
+    border-left: none;
+    border-top: 6px solid #002f6c;
+  }
+
+  h2 {
+    font-size: 1.4em;
+  }
+
+  .radio-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  input, textarea, select, button {
+    font-size: 1em;
+  }
+}
+/* End of style.css */
+/* This file contains the styles for the SMEDAN-NIPOST Discount Form */ 
