@@ -24,14 +24,13 @@ document.getElementById("smedanForm").addEventListener("submit", function (e) {
     lga: document.getElementById("lga").value,
     postOffice: document.getElementById("postOffice").value
   });
-
-  fetch("https://script.google.com/macros/s/AKfycbxOM5RXzKCQ88LqJsNM-WGzFGg49xDfwDdP6y2hvToFOSOnmRrHW_8gf0YJqf231gOV/exec", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: data.toString()
-  })
+  fetch("https://your-vercel-project.vercel.app/api/submit", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+})
   .then(res => res.text())
   .then(response => {
     document.getElementById("loader").style.display = "none";
