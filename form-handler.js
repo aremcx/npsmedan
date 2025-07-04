@@ -24,7 +24,7 @@ document.getElementById("smedanForm").addEventListener("submit", function (e) {
     lga: document.getElementById("lga").value,
     postOffice: document.getElementById("postOffice").value
   });
-  fetch("https://https://npsmedan.vercel.app/api/submit", {
+  fetch("https://npsmedan.vercel.app/api/submit", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
