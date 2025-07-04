@@ -1,32 +1,17 @@
-      "https://script.google.com/macros/s/AKfycbxOM5RXzKCQ88LqJsNM-WGzFGg49xDfwDdP6y2hvToFOSOnmRrHW_8gf0YJqf231gOV/exec"
+# SMEDAN–NIPOST Discount Form
 
-      sheetID = 1iLW6x_SROed0J4_uSjqYLMFxXcgpzFmGPIHnE12N7NM
+A digital form for NIPOST officers to log SME discount transactions, with State–LGA mapping and Neon-powered backend.
 
-      function doPost(e) {
-  const ss = SpreadsheetApp.openById("1iLW6x_SROed0J4_uSjqYLMFxXcgpzFmGPIHnE12N7NM");
-  const sheet = ss.getSheetByName("Sheet1");
+## Features
+- Responsive HTML form
+- State & LGA dynamic dropdowns
+- 15% discount calculator
+- PostgreSQL (Neon) database
+- Serverless API (Vercel)
 
-  const data = JSON.parse(e.postData.contents);
+## Deployment
+Frontend: Netlify  
+Backend: Vercel API connected to Neon DB
 
-  Logger.log(data);
-
-  sheet.appendRow([
-    data.orgName,
-    data.smedan,
-    data.amount,
-    data.discount,
-    data.finalAmount,
-    data.remarks,
-    data.date,
-    data.officerId
-  ]);
-
-  const output = ContentService.createTextOutput("Success");
-  output.setMimeType(ContentService.MimeType.TEXT);
-  output.appendHeader("Access-Control-Allow-Origin", "*"); // use your specific domain in production
-  output.appendHeader("Access-Control-Allow-Methods", "POST");
-  output.appendHeader("Access-Control-Allow-Headers", "Content-Type");
-
-  return output;
-}
-
+## Author
+Built with ❤️ by iSec
