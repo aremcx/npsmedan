@@ -11,7 +11,7 @@ document.getElementById("smedanForm").addEventListener("submit", function (e) {
   e.preventDefault();
   document.getElementById("loader").style.display = "block";
 
-  const data = new URLSearchParams({
+  const data = JSON.stringify({
     orgName: document.getElementById("orgName").value,
     smedan: document.querySelector('input[name="smedan"]:checked')?.value || "No",
     amount: document.getElementById("amount").value,
