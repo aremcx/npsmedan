@@ -11,7 +11,7 @@ document.getElementById("smedanForm").addEventListener("submit", function (e) {
   e.preventDefault();
   document.getElementById("loader").style.display = "block";
 
-  const data = JSON.stringify({
+  const data = {   
     orgName: document.getElementById("orgName").value,
     smedan: document.querySelector('input[name="smedan"]:checked')?.value || "No",
     amount: document.getElementById("amount").value,
@@ -23,7 +23,9 @@ document.getElementById("smedanForm").addEventListener("submit", function (e) {
     state: document.getElementById("state").value,
     lga: document.getElementById("lga").value,
     postOffice: document.getElementById("postOffice").value
-  });
+  };
+
+
   fetch("https://npsmedan.vercel.app/api/submit", {
   method: "POST",
   headers: {
