@@ -1,0 +1,7 @@
+{
+  "framework": null,
+  "public": "public",
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" }
+  ]
+}
