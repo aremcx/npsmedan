@@ -3,12 +3,11 @@
     "version": 2,
     "name": "smedan-nipost-discount-form",
     "framework": null,
+    "functions": {
+        "api/submit.js": {
+            "runtime": "nodejs18.x"
+        }
+    },
     "public": true,
-    "cleanUrls": true,
-    "crons": [
-    {
-      "path": "/api/submit",
-      "schedule": "0 0 * * *"
-    }
-    ]
+    "cleanUrls": true
 }
