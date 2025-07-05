@@ -2,7 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
     "version": 2,
     "name": "smedan-nipost-discount-form",
-    "buildCommand": "next build",
+    "framework": null,
+    "public": true,
     "cleanUrls": true,
     "crons": [
     {
