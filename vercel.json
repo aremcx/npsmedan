@@ -22,8 +22,5 @@
       "dest": "/public/index.html"
     }
   ],
-  "log": {
-    "level": "info",
-    "format": "json"
-  }
+  "log": true
 }
