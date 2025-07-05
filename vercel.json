@@ -2,12 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
     "version": 2,
     "name": "smedan-nipost-discount-form",
-    "framework": null,
-    "functions": {
-        "api/submit.js": {
-            "runtime": "nodejs24"
-        }
-    },
     "public": true,
     "cleanUrls": true
 }
