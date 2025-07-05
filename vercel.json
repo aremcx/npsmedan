@@ -1,7 +1,13 @@
 {
-  "framework": null,
-  "public": "public",
-  "rewrites": [
-    { "source": "/", "destination": "/index.html" }
-  ]
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+    "version": 2,
+    "name": "smedan-nipost-discount-form",
+    "buildCommand": "next build",
+    "cleanUrls": true,
+    "crons": [
+    {
+      "path": "/api/submit",
+      "schedule": "0 0 * * *"
+    }
+    ]
 }
