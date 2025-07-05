@@ -1,0 +1,9 @@
+{
+  "name": "api-submission-handler",
+  "version": "1.0.0",
+  "description": "API handler for form submissions",
+  "private": true,
+  "dependencies": {
+    "firebase": "^9.23.0"
+  }
+}

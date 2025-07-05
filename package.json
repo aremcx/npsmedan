@@ -1,7 +1,16 @@
 {
-  "name": "discount-api",
+  "name": "smedan-nipost-discount-form",
   "version": "1.0.0",
+  "description": "SMEDAN-NIPOST Discount Form",
+  "scripts": {
+    "dev": "npx vercel dev",
+    "build": "npx vercel build",
+    "start": "npx vercel preview"
+  },
   "dependencies": {
-    "pg": "^8.11.1"
+    "firebase": "^9.23.0"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }

@@ -1,0 +1,16 @@
+# Ignore system files
+.DS_Store
+.env.localold
+.vercel
+# Ignore node_modules
+node_modules/
+# Ignore build output
+build/
+dist/
+# Ignore logs
+logs/
+# Ignore environment variables
+.env
+.env.local
+# Ignore temporary files
+*.tmp
