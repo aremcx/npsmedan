@@ -11,20 +11,11 @@
   "routes": [
     {
       "src": "/api/submit",
-      "methods": ["POST"],
       "dest": "/api/submit.js"
     },
     {
       "src": "/(.*)\\.html",
-      "headers": {
-        "cache-control": "max-age=31536000"
-      },
       "dest": "/$1"
-    },
-
-    {
-      "src": "/public/(.*)",
-      "dest": "/public/$1"
     },
     {
       "src": "/(.*)",
