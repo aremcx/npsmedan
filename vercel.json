@@ -1,4 +1,5 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel-schema.json ",
   "version": 2,
   "name": "smedan-nipost-discount-form",
   "public": true,
