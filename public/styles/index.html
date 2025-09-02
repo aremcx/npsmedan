@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcel Declaration Form</title>
+	 <!-- Favicon: Using an emoji as a data URI for simplicity -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+<style>
+        /* General Body Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f2f5 0%, #e0e2e5 100%); /* Subtle gradient background */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top for longer forms */
+            min-height: 100vh;
+            box-sizing: border-box;
+            color: #333; /* Default text color */
+            overflow-x: hidden; /* Prevent horizontal scroll on small screens */
+        }
+
+        /* Form Container Styling */
+        .form-container {
+            background-color: #ffffff;
+            border-left: 8px solid #002f6c; /* NIPOST dark blue accent */
+            border-radius: 12px; /* More rounded corners */
+            padding: 35px 30px;
+            max-width: 680px; /* Slightly wider for better layout */
+            width: 100%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Deeper shadow */
+            box-sizing: border-box;
+            animation: fadeIn 0.8s ease-out; /* Fade-in animation */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+        }
+
+        .form-container:hover {
+            transform: translateY(-5px); /* Slight lift on hover */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+        }
+
+        /* Form Header */
+        h2 {
+            text-align: center;
+            color: #002f6c;
+            margin-bottom: 30px;
+            font-size: 2.2rem; /* Larger font for prominence */
+            font-weight: 700; /* Bolder */
+            border-bottom: 3px solid #fcbf23; /* NIPOST gold accent */
+            padding-bottom: 15px;
+            letter-spacing: 0.5px;
+            position: relative; /* For pseudo-elements */
+        }
+
+        /* Subtle decorative elements for the header */
+        h2::before, h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px; /* Align with border-bottom */
+            height: 3px;
+            background-color: #fcbf23;
+            animation: expandLine 1.5s ease-out forwards;
+        }
+
+        h2::before {
+            left: 50%;
+            transform: translateX(-100%);
+            width: 0;
+        }
+
+        h2::after {
+            right: 50%;
+            transform: translateX(100%);
+            width: 0;
+        }
+
+        /* Info Text */
+        .info-text {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Labels */
+        label {
+            display: block;
+            font-weight: 600; /* Semi-bold */
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: #002f6c; /* Dark blue for labels */
+            font-size: 0.95rem;
+        }
+
+        /* Input, Textarea, Select Styling */
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px; /* More padding */
+            margin-bottom: 18px; /* More space below inputs */
+            border-radius: 8px; /* Rounded corners */
+            border: 1px solid #dcdcdc; /* Lighter border */
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: all 0.3s ease; /* Smooth transitions */
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #007bff; /* Brighter blue on focus */
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Subtle glow on focus */
+            background-color: #f9fcff; /* Very light blue background on focus */
+        }
+
+        /* Radio Group Styling */
+        .radio-group {
+            display: flex;
+            gap: 40px; /* More space between radio options */
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 8px;
+            width: auto; /* Override 100% width */
+            margin-bottom: 0; /* Remove bottom margin */
+            cursor: pointer;
+        }
+
+        .radio-group label {
+            display: inline-flex; /* Align label with radio button */
+            align-items: center;
+            font-weight: 400; /* Normal weight for radio labels */
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #002f6c; /* NIPOST dark blue */
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: 600; /* Semi-bold */
+            font-size: 1.1rem;
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 47, 108, 0.2); /* Button shadow */
+        }
+
+        button:hover {
+            background-color: #004a99; /* Slightly lighter blue on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+            box-shadow: 0 6px 15px rgba(0, 47, 108, 0.3); /* Enhanced shadow on hover */
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 47, 108, 0.2);
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Space between buttons */
+            margin-top: 30px;
+        }
+
+        .action-buttons button {
+            margin-top: 0; /* Override default button margin */
+        }
+
+        /* Footer Message */
+        .footer-message {
+            text-align: center;
+            margin-top: 30px;
+            color: #888;
+            font-size: 0.8rem;
+            padding-top: 15px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Response Message */
+        #responseMessage {
+            text-align: center;
+            margin-top: 25px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            opacity: 0; /* Hidden by default */
+            transform: translateY(10px); /* Slightly below */
+            animation: slideIn 0.5s forwards; /* Animation for appearance */
+        }
+
+        #responseMessage.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loader Styling */
+        .loader {
+            text-align: center;
+            margin-top: 25px;
+            color: #002f6c;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .loader.visible {
+            opacity: 1;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top-color: #002f6c; /* NIPOST dark blue */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loader.hidden {
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes expandLine {
+            from { width: 0; }
+            to { width: 40%; } /* Adjust width as needed */
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.visible .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: #002f6c;
+            font-size: 1.5rem;
+        }
+
+        .modal-close-button {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #888;
+            transition: color 0.2s ease;
+        }
+
+        .modal-close-button:hover {
+            color: #333;
+        }
+
+        .modal-body pre {
+            background-color: #f8f8f8;
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap; /* Preserve whitespace and wrap long lines */
+            word-wrap: break-word;
+            font-family: 'Inter', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #444;
+            max-height: 40vh; /* Limit height for scrollability */
+            overflow-y: auto;
+        }
+
+        .modal-footer {
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: right;
+        }
+
+        .modal-footer button {
+            width: auto;
+            padding: 10px 20px;
+            font-size: 1rem;
+            margin-left: 10px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 25px 20px;
+                border-left: none; /* Remove left border on smaller screens */
+                border-top: 6px solid #002f6c; /* Add top border for mobile accent */
+                border-radius: 8px; /* Slightly less rounded for mobile */
+            }
+
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            label {
+                margin-top: 15px;
+                font-size: 0.9rem;
+            }
+
+            input, textarea, select, button {
+                padding: 10px 12px;
+                font-size: 0.95rem;
+            }
+
+            .radio-group {
+                flex-direction: column; /* Stack radio buttons vertically */
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            button {
+                font-size: 1rem;
+                padding: 12px 20px;
+            }
+
+            .info-text {
+                font-size: 0.85rem;
+            }
+
+            .action-buttons {
+                gap: 10px;
+            }
+
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+            .modal-header h3 {
+                font-size: 1.2rem;
+            }
+            .modal-close-button {
+                font-size: 1.5rem;
+            }
+            .modal-body pre {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+            .modal-footer button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            .form-container {
+                padding: 20px 15px;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1 class="text-4xl font-bold text-center text-[#27245F] mb-2">✈️Parcel Declaration Form</h1>
+		<p class="info-text">
+            This form is designed to collect key shipment and transaction details for international postal items and conveyances.
+			Please ensure all required fields are accurately completed to facilitate proper tracking, customs processing, and billing where applicable.
+        </p>
+        <!-- <p class="text-center text-gray-500 mb-8">Please provide the details for the parcel's clearance.</p> -->
+        
+        <form id="parcelForm" class="space-y-6">
+
+            <!-- Geographic Details -->
+            <div class="input-group flex-col md:flex-row">
+                <div class="input-item">
+                    <label for="state" class="block text-gray-700 font-semibold mb-2">State</label>
+                    <select id="state" name="state" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#91B4DF] focus:border-[#91B4DF] transition-all duration-200" required>
+                        <option value="">Select State</option>
+                    </select>
+                </div>
+                <div class="input-item">
+                    <label for="lga" class="block text-gray-700 font-semibold mb-2">LGA</label>
+                    <select id="lga" name="lga" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#91B4DF] focus:border-[#91B4DF] transition-all duration-200" required>
+                        <option value="">Select LGA</option>
+                    </select>
+                </div>
+                <div class="input-item">
+                    <label for="postOffice" class="block text-gray-700 font-semibold mb-2">Post Office</label>
+                    <input type="text" id="postOffice" name="postOffice" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#91B4DF] focus:border-[#91B4DF] transition-all duration-200" placeholder="e.g., Garki Post Office" required>
+                </div>
+            </div>
+
+            <!-- Carrier Details -->
+            <div>
+                <label class="block text-gray-700 font-semibold mb-2">Carrier Type</label>
+                <div class="flex gap-4">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="carrierType" value="airline" class="form-radio text-[#27245F] h-5 w-5 rounded-full" checked>
+                        <span class="ml-2 text-gray-700">Airline (IATA Code)</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="carrierType" value="truck_ocean" class="form-radio text-[#27245F] h-5 w-5 rounded-full">
+                        <span class="ml-2 text-gray-700">Truck / Ocean (SCAC Code)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="input-group flex-col md:flex-row">
+                <div class="input-item">
+                    <label id="carrierCodeLabel" for="carrierCode" class="block text-gray-700 font-semibold mb-2">Carrier Code (IATA)</label>
+                    <input type="text" id="carrierCode" name="carrierCode" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#91B4DF] focus:border-[#91B4DF] transition-all duration-200" placeholder="e.g., BA" required>
+                </div>
+                <div class="input-item">
+                    <label id="flightTripLabel" for="flightTripNumber" class="block text-gray-700 font-semibold mb-2">Flight Number</label>
+                    <input type="text" id="flightTripNumber" name="flightTripNumber" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#91B4DF] focus:border-[#91B4DF] transition-all duration-200" placeholder="e.g., 234" required>
+                </div>
+            </div>
+
+            <!-- Tracking & Transaction Details -->
+            <div class="input-group flex-col md:flex-row">
+                <div class="input-item">
+                    <label for="trackingNumber" class="block text-gray-700 font-semibold mb-2">Tracking Number</label>
+                    <input type="text" id="trackingNumber" name="trackingNumber" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#91B4DF] focus:border-[#91B4DF] transition-all duration-200" placeholder="e.g., LX12345679HK" required>
+                </div>
+                <div class="input-item">
+                    <label for="natureOfTransaction" class="block text-gray-700 font-semibold mb-2">Nature of Transaction Code</label>
+                    <input type="text" id="natureOfTransaction" name="natureOfTransaction" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#91B4DF] focus:border-[#91B4DF] transition-all duration-200" placeholder="e.g., M03" required>
+                </div>
+            </div>
+
+            <!-- Arrival & Value Details -->
+            <div class="input-group flex-col md:flex-row">
+                <div class="input-item">
+                    <label for="arrivalPortCode" class="block text-gray-700 font-semibold mb-2">Arrival Port Code</label>
+                    <input type="text" id="arrivalPortCode" name="arrivalPortCode" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#91B4DF] focus:border-[#91B4DF] transition-all duration-200" placeholder="e.g., LOS" required>
+                </div>
+                <div class="input-item">
+                    <label for="arrivalDate" class="block text-gray-700 font-semibold mb-2">Arrival Date</label>
+                    <input type="date" id="arrivalDate" name="arrivalDate" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#91B4DF] focus:border-[#91B4DF] transition-all duration-200" required>
+                </div>
+            </div>
+
+            <!-- Financial Details -->
+            <div class="input-group flex-col md:flex-row">
+                <div class="input-item">
+                    <label for="declaredValue" class="block text-gray-700 font-semibold mb-2">Declared Value</label>
+                    <input type="number" id="declaredValue" name="declaredValue" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#91B4DF] focus:border-[#91B4DF] transition-all duration-200" placeholder="e.g., 150.75" required>
+                </div>
+                <div class="input-item">
+                    <label for="currencyCode" class="block text-gray-700 font-semibold mb-2">Currency Code</label>
+                    <input type="text" id="currencyCode" name="currencyCode" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#91B4DF] focus:border-[#91B4DF] transition-all duration-200" placeholder="e.g., USD" required>
+                </div>
+                <div class="input-item">
+                    <label for="countryOfOrigin" class="block text-gray-700 font-semibold mb-2">Country of Origin</label>
+                    <input type="text" id="countryOfOrigin" name="countryOfOrigin" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#91B4DF] focus:border-[#91B4DF] transition-all duration-200" placeholder="e.g., US" required>
+                </div>
+            </div>
+
+            <!-- Optional Details -->
+            <div>
+                <label for="shipperAccountId" class="block text-gray-700 font-semibold mb-2">Shipper Account ID (Optional)</label>
+                <input type="text" id="shipperAccountId" name="shipperAccountId" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#91B4DF] focus:border-[#91B4DF] transition-all duration-200" placeholder="e.g., AC12345">
+            </div>
+
+            <div class="flex justify-center mt-8">
+                <button type="submit" id="submitButton" class="w-full md:w-auto px-8 py-3 bg-[#27245F] text-white font-bold rounded-full hover:bg-[#91B4DF] transition-colors duration-300 transform hover:scale-105 shadow-md flex items-center justify-center">
+                    Submit Form
+                </button>
+            </div>
+        </form>
+
+        <div id="loadingMessage" class="hidden text-center mt-8 text-gray-600">
+            <div class="flex justify-center mb-4">
+                <div class="loading-spinner"></div>
+            </div>
+            <p>Submitting data...</p>
+        </div>
+
+        <div id="statusMessage" class="hidden text-center mt-8">
+            <!-- This message will be populated dynamically -->
+        </div>
+		<div class="footer-message">
+            Powered by Nigerian Postal Service • Postal Efficiency • Built by iSec 🔒
+        </div>
+    </div>
+
+    <script>
+        const statesAndLgasData = {
+            "Abia": ["Aba North", "Aba South", "Arochukwu", "Bende", "Ikwuano", "Isiala Ngwa North", "Isiala Ngwa South", "Isuikwuato", "Obingwa", "Ohafia", "Osisioma Ngwa", "Ugwunagbo", "Ukwa East", "Ukwa West", "Umuahia North", "Umuahia South", "Umunneochi"],
+            "Adamawa": ["Demsa", "Fufore", "Ganye", "Girei", "Gombi", "Guyuk", "Hong", "Jada", "Lamurde", "Madagali", "Maiha", "Mayo-Belwa", "Michika", "Mubi North", "Mubi South", "Numan", "Shelleng", "Song", "Toungo", "Yola North", "Yola South"],
+            "Akwa Ibom": ["Abak", "Eastern Obolo", "Eket", "Esit Eket", "Essien Udim", "Etim Ekpo", "Etinan", "Ibeno", "Ibesikpo Asutan", "Ibiono-Ibom", "Ika", "Ikono", "Ikot Abasi", "Ikot Ekpene", "Ini", "Itu", "Mbo", "Mkpat-Enin", "Nsit-Atai", "Nsit-Ibom", "Nsit-Ubium", "Obot Akara", "Okobo", "Onna", "Oron", "Oruk Anam", "Udung-Uko", "Ukanafun", "Uruan", "Urue-Offong/Oruko", "Uyo"],
+            "Anambra": ["Aguata", "Anambra East", "Anambra West", "Anaocha", "Awka North", "Awka South", "Ayame", "Dunukofia", "Ekwusigo", "Idemili North", "Idemili South", "Ihiala", "Njikoka", "Nnewi North", "Nnewi South", "Ogbaru", "Onitsha North", "Onitsha South", "Orumba North", "Orumba South", "Oyi"],
+            "Bauchi": ["Alkaleri", "Bauchi", "Bogoro", "Damban", "Darazo", "Dass", "Gamawa", "Ganjuwa", "Giade", "Itas/Gadau", "Jama'are", "Katagum", "Kirfi", "Misau", "Ningi", "Shira", "Tafawa Balewa", "Toro", "Warji", "Zaki"],
+            "Bayelsa": ["Brass", "Ekeremor", "Kolokuma/Opokuma", "Nembe", "Ogbia", "Sagbama", "Southern Ijaw", "Yenagoa"],
+            "Benue": ["Ado", "Agatu", "Apa", "Buruku", "Gboko", "Guma", "Gwer East", "Gwer West", "Katsina-Ala", "Konshisha", "Kwande", "Logo", "Makurdi", "Obi", "Ogbadibo", "Ohimini", "Oju", "Okpokwu", "Oturkpo", "Tarka", "Ukum", "Ushongo", "Vandeikya"],
+            "Borno": ["Abadam", "Askira/Uba", "Bama", "Bayo", "Biu", "Chibok", "Damboa", "Dikwa", "Gubio", "Guzamala", "Gwoza", "Hawul", "Jere", "Kaga", "Kala/Balge", "Konduga", "Kukawa", "Kwaya Kusar", "Mafa", "Magumeri", "Maiduguri", "Marte", "Mobbar", "Monguno", "Ngala", "Nganzai", "Shani"],
+            "Cross River": ["Abi", "Akamkpa", "Akpabuyo", "Bakassi", "Bekwarra", "Biase", "Boki", "Calabar Municipal", "Calabar South", "Etung", "Ikom", "Obanliku", "Obubra", "Obudu", "Odukpani", "Ogoja", "Yakuur", "Yala"],
+            "Delta": ["Aniocha North", "Aniocha South", "Bomadi", "Burutu", "Ethiope East", "Ethiope West", "Ika North East", "Ika South", "Isoko North", "Isoko South", "Ndokwa East", "Ndokwa West", "Okpe", "Oshimili North", "Oshimili South", "Patani", "Sapele", "Udu", "Ughelli North", "Ughelli South", " "],
+            "Ebonyi": ["Abakaliki", "Afikpo North", "Afikpo South", "Ebonyi", "Ezza North", "Ezza South", "Ikwo", "Ishielu", "Ivo", "Izzi", "Ohaozara", "Ohaukwu", "Onicha"],
+            "Edo": ["Akoko-Edo", "Egor", "Esan Central", "Esan North-East", "Esan South-East", "Esan West", "Etsako Central", "Etsako East", "Etsako West", "Igwbaz", "Ikpoba Okha", "Orhionmwon", "Oredo", "Ovia North-East", "Ovia South-West", "Owan East", "Owan West", "Uhunmwonde"],
+            "Ekiti": ["Ado Ekiti", "Efon", "Ekiti East", "Ekiti South-West", "Ekiti West", "Emure", "Gbonyin", "Ido Osi", "Ijero", "Ikere", "Ikole", "Ilejemeje", "Irepodun/Ifelodun", "Ise/Orun", "Moba", "Oye"],
+            "Enugu": ["Aninri", "Awgu", "Enugu East", "Enugu North", "Enugu South", "Ezeagu", "Igbo Etiti", "Igbo Eze North", "Igbo Eze South", "Isi Uzo", "Nkanu East", "Nkanu West", "Nsukka", "Oji River", "Udenu", "Udi", "Uzo-Uwani"],
+            "Gombe": ["Akko", "Balanga", "Billiri", "Dukku", "Funakaye", "Gombe", "Kaltungo", "Kwami", "Nafada", "Shongom", "Yamaltu/Deba"],
+            "Imo": ["Aboh Mbaise", "Ahiazu Mbaise", "Ehime Mbano", "Ezinihitte", "Ideato North", "Ideato South", "Ihitte/Uboma", "Ikeduru", "Isiala Mbano", "Isu", "Mbaitoli", "Ngor Okpala", "Njaba", "Nkwerre", "Nwangele", "Obowo", "Oguta", "Ohaji/Egbema", "Okigwe", "Onuimo", "Orlu", "Orsu", "Oru East", "Oru West", "Owerri Municipal", "Owerri North", "Owerri West"],
+            "Jigawa": ["Auyo", "Babura", "Biriniwa", "Birnin Kudu", "Buji", "Dutse", "Gagarawa", "Garki", "Gumel", "Guri", "Gwaram", "Hadejia", "Jahun", "Kafin Hausa", "Kazaure", "Kiri Kasama", "Kiyawa", "Kaugama", "Maigatari", "Malam Madori", "Miga", "Ringim", "Roni", "Sule Tankarkar", "Taura", "Yankwashi"],
+            "Kaduna": ["Birnin Gwari", "Chikun", "Giwa", "Igabi", "Ikara", "Jaba", "Jema'a", "Kachia", "Kaduna North", "Kaduna South", "Kagarko", "Kajuru", "Kaura", "Kauru", "Kubau", "Kudan", "Lere", "Makarfi", "Sabon Gari", "Sanga", "Soba", "Zangon Kataf", "Zaria"],
+            "Kano": ["Ajingi", "Albasu", "Bagwai", "Bebeji", "Bichi", "Bunkure", "Dala", "Dambatta", "Dawakin Kudu", "Dawakin Tofa", "Doguwa", "Fagge", "Gabasawa", "Garko", "Garun Mallam", "Gaya", "Gezawa", "Gwale", "Gwarzo", "Kabo", "Kano Municipal", "Karaye", "Kibiya", "Kiru", "Kumbotso", "Kunchi", "Kura", "Madobi", "Makoda", "Minjibir", "Nassarawa", "Rano", "Rimin Gado", "Rogo", "Shanono", "Sumaila", "Takai", "Tarauni", "Tofa", "Tsanyawa", "Tudun Wada", "Ungogo", "Warawa", "Wudil"],
+            "Katsina": ["Bakori", "Batagarawa", "Batsari", "Baure", "Bindawa", "Charanchi", "Dandume", "Danja", "Dan Musa", "Daura", "Dutsi", "Dutsin-Ma", "Faskari", "Funtua", "Ingawa", "Jibia", "Kafur", "Kaita", "Kankara", "Kankia", "Katsina", "Kurfi", "Kusada", "Mai'Adua", "Malumfashi", "Mani", "Mashi", "Matazu", "Musawa", "Rimi", "Sabuwa", "Safana", "Sandamu", "Zango"],
+            "Kebbi": ["Aleiro", "Arewa Dandi", "Argungu", "Augie", "Bagudo", "Birnin Kebbi", "Bunza", "Dandi", "Fakai", "Gwandu", "Jega", "Kalgo", "Koko/Besse", "Maiyama", "Ngaski", "Sakaba", "Shanga", "Suru", "Wasagu/Danko", "Yauri", "Zuru"],
+            "Kogi": ["Adavi", "Ajaokuta", "Ankpa", "Bassa", "Dekina", "Ibaji", "Idah", "Igalamela Odolu", "Ijumu", "Kabba/Bunu", "Kogi", "Lokoja", "Mopa-Muro", "Ofu", "Ogori/Magongo", "Okehi", "Okene", "Olamaboro", "Omala", "Yagba East", "Yagba West"],
+            "Kwara": ["Asa", "Baruten", "Edu", "Ekiti", "Ifelodun", "Ilorin East", "Ilorin South", "Ilorin West", "Isin", "Kaiama", "Moro", "Offa", "Oke Ero", "Oyun", "Pategi"],
+            "Lagos": ["Agege", "Ajeromi-Ifelodun", "Alimosho", "Amuwo-Odofin", "Apapa", "Badagry", "Epe", "Eti-Osa", "Ibeju-Lekki", "Ifako-Ijaiye", "Ikeja", "Ikorodu", "Kosofe", "Lagos Island", "Lagos Mainland", "Mushin", "Ojo", "Oshodi-Isolo", "Shomolu", "Surulere"],
+            "Nasarawa": ["Akwanga", "Awe", "Doma", "Karu", "Keana", "Keffi", "Kokona", "Lafia", "Nasarawa", "Nasarawa Egon", "Obi", "Toto", "Wamba"],
+            "Niger": ["Agaie", "Agwara", "Bida", "Borgu", "Bosso", "Chanchaga", "Edati", "Gbako", "Gurara", "Katcha", "Kontagora", "Lapai", "Lavun", "Magama", "Mariga", "Mashegu", "Mokwa", "Paikoro", "Rafi", "Rijau", "Shiroro", "Suleja", "Tafa", "Wushishi"],
+            "Ogun": ["Abeokuta North", "Abeokuta South", "Ado-Odo/Ota", "Egbado North", "Egbado South", "Ewekoro", "Ijebu East", "Ijebu North", "Ijebu North East", "Ijebu Ode", "Ikenne", "Imeko Afon", "Ipokia", "Obafemi Owode", "Odeda", "Odogbolu", "Ogun Waterside", "Remo North", "Sagamu"],
+            "Ondo": ["Akoko North-East", "Akoko North-West", "Akoko South-Akure East", "Akoko South-West", "Akure North", "Akure South", "Ese Odo", "Idanre", "Ifedore", "Ilaje", "Ile Oluji/Okeigbo", "Irele", "Odigbo", "Okitipupa", "Ondo East", "Ondo West", "Ose", "Owo"],
+            "Osun": ["Atakunmusa East", "Atakunmusa West", "Aiyedaade", "Aiyedire", "Bolwaduro", "Borkin", "Ede North", "Ede South", "Egbedore", "Ejigbo", "Ife Central", "Ife East", "Ife North", "Ife South", "Ifelodun", "Ila", "Ilesa East", "Ilesa West", "Irepodun", "Irewole", " "],
+            "Oyo": ["Akinyele", "Atiba", "Atisbo", "Egbeda", "Ibadan North", "Ibadan North-East", "Ibadan North-West", "Ibadan South-East", "Ibadan South-West", "Ibram", "Ido", "Ifeloju", "Irepo", "Iseyin", "Itesiwaju", "Iwajowa", "Kajola", " "],
+            "Plateau": ["Barkin Ladi", "Bassa", "Bokkos", "Jos East", "Jos North", "Jos South", "Kanam", "Kanke", "Langtang North", "Langtang South", "Mangu", "Mikang", "Pankshin", "Qua'an Pan", "Riyom", "Shendam", "Wase"],
+            "Rivers": ["Abua/Odual", "Ahoada East", "Ahoada West", "Akuku-Toru", "Andoni", "Bonny", "Degema", "Eleme", "Emuoha", "Etche", "Gokana", "Ikwerre", "Khana", "Obio/Akpor", "Ogba/Egbema/Ndoni", "Ogu/Bolo", "Okrika", "Omuma", "Opobo/Nkoro", "Oyigbo", "Port Harcourt", "Tai"],
+            "Sokoto": ["Binji", "Bodinga", "Dange Shuni", "Gada", "Goronyo", "Gudu", "Gwadabawa", "Illela", "Kebbe", "Kware", "Rabah", "Sabon Birni", "Shagari", "Silame", "Sokoto North", "Sokoto South", "Tambuwal", "Tangaza", "Tureta", "Wamako", "Wurno", "Yabo"],
+            "Taraba": ["Ardo Kola", "Bali", "Donga", "Gashaka", "Gassol", "Ibi", "Jalingo", "Karim Lamido", "Kaufu", "Lau", "Sardauna", "Takum", "Ussa", "Wukari", "Yorro", "Zing"],
+            "Yobe": ["Bade", "Bursari", "Damaturu", "Dandali", "Fika", "Fune", "Geidam", "Gogaram", "Gujba", "Gulani", "Jakusko", "Karasuwa", "Machina", "Nangere", "Nguru", "Potiskum", "Tarmuwa", "Yunusari", "Yusufari"],
+            "Zamfara": ["Anka", "Bakura", "Birnin Magaji/Kiyaw", "Bukkuyum", "Bungudu", "Gummi", "Gusau", "Kaura Namoda", "Maradun", "Maru", "Shinkafi", "Talata Mafara", "Tsafe", "Zurmi"],
+            "Federal Capital Territory": ["Abaji", "Abuja Municipal", "Bwari", "Gwagwalada", "Kuje", "Kwali"]
+        };
+
+        const form = document.getElementById('parcelForm');
+        const stateSelect = document.getElementById('state');
+        const lgaSelect = document.getElementById('lga');
+        const carrierRadios = document.querySelectorAll('input[name="carrierType"]');
+        const carrierCodeLabel = document.getElementById('carrierCodeLabel');
+        const flightTripLabel = document.getElementById('flightTripLabel');
+        const submitButton = document.getElementById('submitButton');
+        const loadingMessage = document.getElementById('loadingMessage');
+        const statusMessage = document.getElementById('statusMessage');
+
+        // Function to populate dropdowns
+        const populateDropdown = (selectElement, options) => {
+            selectElement.innerHTML = `<option value="">Select ${selectElement.id.replace('lga', 'LGA')}</option>`;
+            options.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option;
+                opt.textContent = option;
+                selectElement.appendChild(opt);
+            });
+        };
+
+        // Populate initial State dropdown from hardcoded data
+        const populateStatesDropdown = () => {
+            const stateNames = Object.keys(statesAndLgasData);
+            populateDropdown(stateSelect, stateNames);
+        };
+
+        // Event listener for dynamic dropdowns
+        stateSelect.addEventListener('change', () => {
+            const selectedStateName = stateSelect.value;
+            lgaSelect.disabled = !selectedStateName;
+
+            if (selectedStateName) {
+                const lgas = statesAndLgasData[selectedStateName];
+                populateDropdown(lgaSelect, lgas);
+            } else {
+                populateDropdown(lgaSelect, []);
+            }
+        });
+
+        // Event listener for carrier type radio buttons
+        carrierRadios.forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                if (event.target.value === 'airline') {
+                    carrierCodeLabel.textContent = 'Carrier Code (IATA)';
+                    flightTripLabel.textContent = 'Flight Number';
+                    document.getElementById('carrierCode').placeholder = 'e.g., BA';
+                    document.getElementById('flightTripNumber').placeholder = 'e.g., 234';
+                } else {
+                    carrierCodeLabel.textContent = 'Carrier Code (SCAC)';
+                    flightTripLabel.textContent = 'Trip Number';
+                    document.getElementById('carrierCode').placeholder = 'e.g., DHLT';
+                    document.getElementById('flightTripNumber').placeholder = 'e.g., AB123';
+                }
+            });
+        });
+
+        // Form submission handler
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            // Show loading message and disable button
+            submitButton.disabled = true;
+            loadingMessage.classList.remove('hidden');
+            statusMessage.classList.add('hidden');
+            
+            const formData = new FormData(form);
+
+            // The URL of your deployed Google Apps Script
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbxQ80ila3at0LqfQvHm4q6RCFekMTLQv_OipPC3l2XaiwQQB2nE1iHRYQ_cE35LZ9IR7g/exec';
+
+            // Send the form data to the Apps Script
+            fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'no-cors', // Required for cross-origin requests
+                body: formData
+            })
+            .then(response => {
+                // Since 'no-cors' mode is used, the response object is opaque.
+                // We assume success and handle potential errors on the backend side.
+                // Display success message
+                form.classList.add('hidden');
+                statusMessage.innerHTML = '<h2 class="text-3xl font-bold text-[#FDD700]">Success!</h2><p class="text-lg text-gray-700 mt-2">Your data has been successfully submitted.</p>';
+                statusMessage.classList.remove('hidden');
+            })
+            .catch(error => {
+                console.error('Submission failed:', error);
+                // Display error message
+                statusMessage.innerHTML = '<h2 class="text-3xl font-bold text-red-500">Error!</h2><p class="text-lg text-gray-700 mt-2">There was an issue submitting your data. Please try again.</p>';
+                statusMessage.classList.remove('hidden');
+            })
+            .finally(() => {
+                // Hide loading message and re-enable button
+                loadingMessage.classList.add('hidden');
+                submitButton.disabled = false;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Optional: reset form and hide status message after a delay
+                setTimeout(() => {
+                    form.reset();
+                    form.classList.remove('hidden');
+                    statusMessage.classList.add('hidden');
+                }, 5000);
+            });
+        });
+
+        // Populate the dropdowns on page load
+        populateStatesDropdown();
+    </script>
+</body>
+</html>
